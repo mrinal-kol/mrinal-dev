@@ -24,6 +24,9 @@ class FormController extends Controller
         ]);
         */
 
+        //print_r($request->all());
+        //exit;
+
         // Insert the data into the posts table
         $post = PostData::create([
             
