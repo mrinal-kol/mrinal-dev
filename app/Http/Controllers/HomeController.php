@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student_details;
 
 class HomeController extends Controller
 {
@@ -18,5 +19,39 @@ class HomeController extends Controller
         //aboutus.blade.php
         $surce='mrinal';
         return view('aboutus', compact('surce'));
+    }
+    public function services()
+    {
+        $students = Student_details::all();
+        
+        //echo "test";
+        //aboutus.blade.php
+        $surce='mrinal';
+        return view('aboutus', compact('students'));
+    }
+    public function Portfolio()
+    {
+        //echo "test";
+        //aboutus.blade.php
+        $surce='mrinal';
+        return view('aboutus', compact('surce'));
+    }
+    public function contactus()
+    {
+        //echo "test";
+        //aboutus.blade.php
+        $surce='mrinal';
+        return view('aboutus', compact('surce'));
+    }
+    public function fetchData($id)
+    {
+        $details =Student_details::find($id);
+        echo "<pre>";
+        print_r($details->toArray());
+        if (!$details) {
+            //return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        //return response()->json($details);
     }
 }

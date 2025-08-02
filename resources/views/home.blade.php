@@ -1,103 +1,124 @@
- <link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
- <!-- resources/views/form.blade.php -->
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Example</title>
+    <title>Laravel Form Centered</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
-    
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
+
+    <style>
+      
+.container-flex {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+}
+
+.middle {
+    width: 70%;
+    background-color: #ffffff;
+    /*padding: 40px 20px;
+    margin: 40px auto;*/
+/*    box-shadow: 0 0 10px rgba(0,0,0,0.1);*/
+}
+        .left, .right {
+            flex: 1;
+            background-color: #f2f2f2;
+        }
+
+      
+
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .alert-dismissible {
+            z-index: 9999;
+        }
+    </style>
 </head>
 <body>
-<div style='width:100%'>
+
 @if(session('message'))
-    <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+    <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert"
+         style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);">
         {{ session('message') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
- @include('header')
-<form action="{{ route('submitForm') }}" method="POST" style='display:none;'>
-     @csrf
-  <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-    <hr>
-
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-    <button type="submit" class="registerbtn">Register</button>
-  </div>
-
-  <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
-  </div>
-</form>
+@include('header')
 
 
-    <div class="form-container" style='right'>
-        <h2>Registration Form</h2>
-        <!-- <form action="{{ route('submitForm') }}" method="POST"> -->
-          <form id='reg_form' method="POST"  action="">
-    @csrf
-    <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required placeholder="Enter your full name" value="John Doe">
+
+<div class="container-flex">
+    <div class="left">
+        <!-- Optional Left Column -->
     </div>
 
-    <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required placeholder="Enter your email" value="johndoe@example.com">
+    <div class="middle">
+        <div class="form-container">
+            <h2 class="mb-4 text-center">Registration Form</h2>
+
+            <!-- action="{{ route('submitForm') }} -->
+            <form id="reg_form" method="POST" >
+                @csrf
+
+                <div class="form-group mb-3">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required value="John Doe">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required value="johndoe@example.com">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required value="Password123">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Gender</label><br>
+                    <input type="radio" id="male" name="gender" value="male" checked>
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="hobbies">Hobbies</label><br>
+                    <input type="checkbox" id="reading" name="hobbies[]" value="Reading" checked>
+                    <label for="reading">Reading</label>
+                    <input type="checkbox" id="travelling" name="hobbies[]" value="Travelling" checked>
+                    <label for="travelling">Travelling</label>
+                    <input type="checkbox" id="coding" name="hobbies[]" value="Coding">
+                    <label for="coding">Coding</label>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" class="form-control" rows="4">Hello, I am interested in your services.</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+            <div id="responseMsg"></div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required placeholder="Create a password" value="Password123">
-    </div>
-
-    <div class="form-group row">
-        <label>Gender</label>
-        <input type="radio" id="male" name="gender" value="male" checked>
-        <label for="male">Male</label>
-
-        <input type="radio" id="female" name="gender" value="female">
-        <label for="female">Female</label>
-    </div>
-
-    <div class="form-group">
-        <label for="hobbies">Select your hobbies</label>
-        <input type="checkbox" id="reading" name="hobbies" value="Reading" checked>
-        <label for="reading">Reading</label>
-        
-        <input type="checkbox" id="travelling" name="hobbies" value="Travelling" checked>
-        <label for="travelling">Travelling</label>
-
-        <input type="checkbox" id="coding" name="hobbies" value="Coding">
-        <label for="coding">Coding</label>
-    </div>
-
-    <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" placeholder="Write your message...">Hello, I am interested in your services.</textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-
-        
+    <div class="right">
+        <!-- Optional Right Column -->
     </div>
 </div>
 </body>

@@ -40,9 +40,30 @@
             },
             // Handle form submission programmatically after validation
             submitHandler: function(form) {
-            
-            $(form).attr('action', customActionUrl);
-            form.submit();
+            //alert();
+            //$(form).attr('action', customActionUrl);
+            //form.submit();
+               // submitHandler: function(form) {
+            $.ajax({
+                url: customActionUrl ,
+                method: 'POST',
+                data: $(form).serialize(),
+                success: function(response) {
+                    //alert();
+                    $('#responseMsg').html('<p style="color:green;">' + response.message + '</p>');
+                    form.reset();
+                },
+                error: function(xhr) {
+                    let res = xhr.responseJSON;
+                    if (res && res.errors) {
+                        let messages = '';
+                        $.each(res.errors, function(key, val) {
+                            messages += '<p style="color:red;">' + val + '</p>';
+                        });
+                        $('#responseMsg').html(messages);
+                    }
+                }
+            });
         }
     });
      
