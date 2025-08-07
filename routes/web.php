@@ -17,5 +17,7 @@ Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/Portfolio', [HomeController::class, 'Portfolio'])->name('Portfolio');
 Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
 Route::get('/fetchData/{id}', [HomeController::class, 'fetchData'])->name('fetchData');
+Route::get('/login', [UpdateController::class, 'index'])->name('login');
+Route::post('/login', [UpdateController::class, 'login'])->name('login.submit');
 // use App\Http\Controllers\SchoolFormController;
 // Route::get('/school_form', [SchoolFormController::class, 'school_form']);
