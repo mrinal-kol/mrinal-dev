@@ -58,7 +58,7 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+    /*
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -70,7 +70,13 @@ return [
         //     'table' => 'users',
         // ],
     ],
-
+    */
+  'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Student_details::class,
+    ],
+],
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

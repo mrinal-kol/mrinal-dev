@@ -16,7 +16,6 @@ class Student_details extends Authenticatable
         'email',
         'password',
         'status',
-        // Add other fillable fields if needed
     ];
 
     protected $hidden = [
