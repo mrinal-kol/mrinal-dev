@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student_details;
 use Illuminate\Support\Facades\Hash; 
+use App\Http\Controllers\HomeController;
 class UpdateController extends Controller
 {
     public function index()
@@ -46,8 +47,9 @@ class UpdateController extends Controller
 
         Auth::login($user);
         $request->session()->regenerate();
+        return redirect()->action([HomeController::class, 'index']);
 
-        return redirect()->intended('/dashboard');
+        //return redirect()->intended('/dashboard');
     }
 
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\UpdateController;
+Route::get('/', [\App\Http\Controllers\UpdateController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/update',[UpdateController::class,'index'])->name('update');
 Route::post('/submit', [FormController::class, 'submitForm'])->name('submitForm'); 
