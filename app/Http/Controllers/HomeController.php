@@ -46,12 +46,11 @@ class HomeController extends Controller
     public function fetchData($id)
     {
         $details =Student_details::find($id);
-        echo "<pre>";
-        print_r($details->toArray());
-        if (!$details) {
-            //return response()->json(['message' => 'Product not found'], 404);
+        if ($details) {
+            return view('fetchResult', compact('details'));
         }
 
-        //return response()->json($details);
+        //return response()->json(['message' => 'Student not found'], 404);
+    
     }
 }
