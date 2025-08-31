@@ -10,6 +10,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
     
+    
+</head>
+    
 </head>
 <body>
     <style>
@@ -78,6 +81,8 @@
 
 
     <div class="container">
+
+         
         @if($method_nm=='aboutus')
         
              
@@ -153,6 +158,12 @@
     </section>
      @endif
      @if($method_nm=='Portfolio')
+
+     <div id="app">
+            <example-component></example-component>
+        </div>
+        @vite('resources/js/app.js')
+
      <section id="portfolio">
       <h2>Portfolio</h2>
       <div class="portfolio">
@@ -182,6 +193,9 @@
       </form>
     </section>
      @endif
+
+
+   
   </div>
 
   <footer>
