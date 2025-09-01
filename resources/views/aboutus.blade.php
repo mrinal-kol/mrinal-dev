@@ -160,7 +160,9 @@
      @if($method_nm=='Portfolio')
 
      <div id="app">
-            <example-component></example-component>
+            <!-- <example-component></example-component> -->
+            <example-fromsubmit></example-fromsubmit>
+            
         </div>
         @vite('resources/js/app.js')
 
