@@ -208,11 +208,11 @@
         </div>
       </div>
     </section>
-    <div id="app">
+    <!-- <div id="app"> -->
             <!-- <example-component></example-component> -->
             <!-- <example-fromsubmit></example-fromsubmit> -->
-            <student-crud></student-crud>
-    </div>
+            <!-- <student-crud></student-crud>
+    </div> -->
         @vite('resources/js/app.js')
     @endif
 

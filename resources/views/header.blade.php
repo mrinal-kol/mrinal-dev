@@ -143,6 +143,7 @@
             <li><a class="nav-link" href="{{ route('services') }}">Services</a></li>
             <li><a class="nav-link" href="{{ route('Portfolio') }}">Portfolio</a></li>
             <li><a class="nav-link" href="{{ route('contactus') }}">Contact</a></li>
+            <li><a class="nav-link" href="{{ route('vue_example') }}">Vue Example</a></li>
         </ul>
 
         <div class="cta">
