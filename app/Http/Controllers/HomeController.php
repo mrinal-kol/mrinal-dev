@@ -53,4 +53,10 @@ class HomeController extends Controller
         //return response()->json(['message' => 'Student not found'], 404);
     
     }
+
+    public function vueExample()
+    {
+        $surce='mrinal';
+        return view('vueexample', compact('surce'));
+    }
 }
