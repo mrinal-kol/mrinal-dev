@@ -29,34 +29,45 @@ class FormController extends Controller
         // exit;
         //protected $fillable = ['SL_NAME','SL_CLASS','SL_ROLL','updated_at','created_at'];
         // Insert the data into the posts table
-        $post = PostData::create([
+
+        try{
+                $post = PostData::create([
             
-             'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password), // never store plain passwords!
-            'gender'   => $request->gender,
-            'hobbies'  => $request->hobbies,
-            'message'  => $request->message,
-        ]);
+                    'name'     => $request->name,
+                    'email'    => $request->email,
+                    'password' => Hash::make($request->password), // never store plain passwords!
+                    'gender'   => $request->gender,
+                    'hobbies'  => $request->hobbies,
+                    'message'  => $request->message,
+                ]);
 
-        // Return success message
-        if ($post) {
-            return response()->json(['message' => 'Form submitted successfully!']);
-          //  session()->flash('message', 'Post created successfully!');
-        // return response()->json([
-        //     'message' => 'Post created successfully!',
-        //     'post' => $post
-        // ]);
-        } else {
-            return response()->json(['errors' => 'faild'], 422);
-            // session()->flash('message', 'Post creation failed.');
-            //return response()->json(['message' => 'Post creation failed.'], 500);
+                // Return success message
+                if ($post) {
+                    return response()->json(['message' => 'Form submitted successfully!']);
+                //  session()->flash('message', 'Post created successfully!');
+                // return response()->json([
+                //     'message' => 'Post created successfully!',
+                //     'post' => $post
+                // ]);
+                } else {
+                    return response()->json(['message' => 'Post creation failed.'], 500);
+                    // session()->flash('message', 'Post creation failed.');
+                    //return response()->json(['message' => 'Post creation failed.'], 500);
+                }
+
+                //return redirect()->action([HomeController::class, 'index']);
+                //return redirect()->route('home');
+                //print_r($request->all());
         }
-
-         //return redirect()->action([HomeController::class, 'index']);
-        //return redirect()->route('home');
-        //print_r($request->all());
-    exit;
+        catch(Exception $e)
+        {
+            return response()->json([
+            'error' => true,
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+            ], 500);
+        }
+        exit;
 
         // Process the data (e.g., save to the database)
         // For now, we will just return the validated data

@@ -49,19 +49,39 @@
                 method: 'POST',
                 data: $(form).serialize(),
                 success: function(response) {
+                    //console.log(response);
                     //alert();
                     $('#responseMsg').html('<p style="color:green;">' + response.message + '</p>');
                     form.reset();
                 },
                 error: function(xhr) {
+                    $('#loader').hide();
+
                     let res = xhr.responseJSON;
-                    if (res && res.errors) {
-                        let messages = '';
-                        $.each(res.errors, function(key, val) {
-                            messages += '<p style="color:red;">' + val + '</p>';
-                        });
-                        $('#responseMsg').html(messages);
+                    let messages = '';
+
+                    if (res) {
+                        // Validation errors (422)
+                        if (res.errors) {
+                            $.each(res.errors, function(key, val) {
+                                messages += '<p class="text-danger">' + val + '</p>';
+                            });
+                        }
+
+                        // Runtime exception (500)
+                        if (res.message) {
+                            messages += '<p class="text-danger">' + res.message + '</p>';
+                        }
+
+                        // Optional: show trace in small text (for debugging)
+                        if (res.trace) {
+                            messages += '<pre class="text-muted">' + res.trace + '</pre>';
+                        }
+                    } else {
+                        messages = '<p class="text-danger">An unknown error occurred.</p>';
                     }
+
+                    $('#responseMsg').html(messages);
                 }
             });
         }
