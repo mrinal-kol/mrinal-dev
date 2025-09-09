@@ -1,59 +1,17 @@
- <link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
- <!-- resources/views/form.blade.php -->
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Example</title>
+    <title>Laravel Form Centered</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
-    
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-      background: white;
-    }
-
-    h1 {
-      color: #333;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    p {
-      color: #555;
-    }
-
-    .team-section {
-      margin-top: 40px;
-    }
-
-    .team-member {
-      margin-bottom: 20px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #333;
-      color: white;
-      margin-top: 40px;
-    }
-  </style>
 <div style='width:100%'>
 @if(session('message'))
     <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 9999;">

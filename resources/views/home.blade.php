@@ -13,37 +13,7 @@
 
     <style>
       
-.container-flex {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #f8f9fa;
-    display: flex;
-    justify-content: center;
-}
 
-.middle {
-    width: 70%;
-    background-color: #ffffff;
-    /*padding: 40px 20px;
-    margin: 40px auto;*/
-/*    box-shadow: 0 0 10px rgba(0,0,0,0.1);*/
-}
-        .left, .right {
-            flex: 1;
-            background-color: #f2f2f2;
-        }
-
-      
-
-        .form-container {
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .alert-dismissible {
-            z-index: 9999;
-        }
     </style>
 </head>
 <body>
@@ -120,7 +90,11 @@
     <div class="right">
         <!-- Optional Right Column -->
     </div>
+   
 </div>
+ <footer>
+    &copy; 2025 [Your Company Name]. All rights reserved.
+    </footer>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

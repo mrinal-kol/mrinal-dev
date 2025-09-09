@@ -1,96 +1,17 @@
-<link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
-<!-- resources/views/form.blade.php -->
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Example</title>
+    <title>Laravel Form Centered</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
     
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-      background: white;
-    }
-
-    h1, h2 {
-      color: #333;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    p {
-      color: #555;
-    }
-
-    .team-section, .services, .portfolio {
-      margin-top: 40px;
-    }
-
-    .team-member, .card {
-      margin-bottom: 20px;
-    }
-
-    .card {
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-    }
-
-    /* Responsive grid */
-    .services, .portfolio {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    form input, form textarea, form button {
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    form button {
-      background-color: #28a745;
-      color: white;
-      border: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #333;
-      color: white;
-      margin-top: 40px;
-    }
-
-    /* Mobile tweaks */
-    @media (max-width: 768px) {
-      .container {
-        padding: 20px 10px;
-      }
-      h1, h2 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
 
 <div style='width:100%'>
 @if(session('message'))
