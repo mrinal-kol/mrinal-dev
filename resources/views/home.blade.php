@@ -12,85 +12,124 @@
     <link href="{{ asset('css/laravel_style.css') }}" rel="stylesheet">
 
     <style>
-      
+      .card {
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            border-radius: 25px;
+            font-size: 1.1rem;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        
+
+        @media (min-width: 768px) {
+    .col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 90%; /* 👈 custom override */
+    }
+}
 
     </style>
 </head>
 <body>
-
+@include('header')
 @if(session('message'))
-    <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert"
-         style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);">
+    <div id="success-message" class="alert alert-success alert-dismissible fade show text-center" role="alert"
+         style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); width: auto; z-index: 1050;">
         {{ session('message') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 @endif
 
-@include('header')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">Registration Form</div>
+                <div class="card-body">
+                    <form id="reg_form" method="POST" action="{{ route('submitForm') }}">
+                        @csrf
 
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required value="John Doe">
+                        </div>
 
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required value="johndoe@example.com">
+                        </div>
 
-<div class="container-flex">
-    <div class="left">
-        <!-- Optional Left Column -->
-    </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required value="Password123">
+                        </div>
 
-    <div class="middle">
-        <div class="form-container">
-            <h2 class="mb-4 text-center">Registration Form</h2>
+                        <div class="form-group">
+                            <label>Gender</label><br>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="male" name="gender" value="male" class="form-check-input" checked>
+                                <label for="male" class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="female" name="gender" value="female" class="form-check-input">
+                                <label for="female" class="form-check-label">Female</label>
+                            </div>
+                        </div>
 
-            <!-- action="{{ route('submitForm') }} -->
-            <form id="reg_form" method="POST" >
-                @csrf
+                        <div class="form-group">
+                            <label>Hobbies</label><br>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" id="reading" name="hobbies[]" value="Reading" class="form-check-input" checked>
+                                <label for="reading" class="form-check-label">Reading</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" id="travelling" name="hobbies[]" value="Travelling" class="form-check-input" checked>
+                                <label for="travelling" class="form-check-label">Travelling</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" id="coding" name="hobbies[]" value="Coding" class="form-check-input">
+                                <label for="coding" class="form-check-label">Coding</label>
+                            </div>
+                        </div>
 
-                <div class="form-group mb-3">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" class="form-control" required value="John Doe">
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="3">Hello, I am interested in your services.</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                    <div id="responseMsg"></div>
                 </div>
-
-                <div class="form-group mb-3">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-control" required value="johndoe@example.com">
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" required value="Password123">
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Gender</label><br>
-                    <input type="radio" id="male" name="gender" value="male" checked>
-                    <label for="male">Male</label>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">Female</label>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="hobbies">Hobbies</label><br>
-                    <input type="checkbox" id="reading" name="hobbies[]" value="Reading" checked>
-                    <label for="reading">Reading</label>
-                    <input type="checkbox" id="travelling" name="hobbies[]" value="Travelling" checked>
-                    <label for="travelling">Travelling</label>
-                    <input type="checkbox" id="coding" name="hobbies[]" value="Coding">
-                    <label for="coding">Coding</label>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" class="form-control" rows="4">Hello, I am interested in your services.</textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
-            </form>
-            <div id="responseMsg"></div>
+            </div>
         </div>
     </div>
-
-    <div class="right">
-        <!-- Optional Right Column -->
-    </div>
-   
 </div>
  <footer>
     &copy; 2025 [Your Company Name]. All rights reserved.
