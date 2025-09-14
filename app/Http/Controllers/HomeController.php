@@ -69,7 +69,7 @@ class HomeController extends Controller
             ]);
 
         // Redirect back to services with success message
-            return response()->json(['message' => 'Form submitted successfully!']);
+            return response()->json(['message' => 'Form submitted successfully!','flag'=>'update']);
         } catch (\Exception $e) {
             return response()->json([
             'error' => true,

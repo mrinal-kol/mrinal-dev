@@ -43,7 +43,7 @@ class FormController extends Controller
 
                 // Return success message
                 if ($post) {
-                    return response()->json(['message' => 'Form submitted successfully!']);
+                    return response()->json(['message' => 'Form submitted successfully!','flag'=>'add']);
                 //  session()->flash('message', 'Post created successfully!');
                 // return response()->json([
                 //     'message' => 'Post created successfully!',
