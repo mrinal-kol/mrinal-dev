@@ -40,7 +40,12 @@
             },
             // Handle form submission programmatically after validation
             submitHandler: function(form) {
-            //alert();
+            let $submitBtn = $(form).find(':submit'); // find submit button
+            //$submitBtn.prop('disabled', true).text('Submitting...'); 
+             $submitBtn
+                .prop('disabled', true)
+                .css('cursor', 'not-allowed')
+                .text('Submitting...');
             //$(form).attr('action', customActionUrl);
             //form.submit();
                // submitHandler: function(form) {
@@ -49,10 +54,13 @@
                 method: 'POST',
                 data: $(form).serialize(),
                 success: function(response) {
-                    //console.log(response);
+                    console.log(response);
                     //alert();
                     $('#responseMsg').html('<p style="color:green;">' + response.message + '</p>');
-                    form.reset();
+
+                    if(response.flag!='update'){
+                        form.reset();
+                    }
                 },
                 error: function(xhr) {
                     $('#loader').hide();
@@ -82,6 +90,13 @@
                     }
 
                     $('#responseMsg').html(messages);
+                },
+                complete: function() {
+                    // ✅ Always re-enable submit button after request
+                    $submitBtn
+                        .prop('disabled', false)
+                        .css('cursor', 'pointer')
+                        .text('Submit');
                 }
             });
         }

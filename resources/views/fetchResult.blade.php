@@ -136,7 +136,7 @@
                         </div>
                         
 
-                        <button type="submit" class="btn btn-primary btn-block">Update</button>
+                        <button type="submit" class="btn btn-primary btn-block" style='cursor: pointer;'>Update</button>
                        
                         <a href="{{ route('services') }}"  class="btn btn-primary" style="background-color:black">Back</a>
                        
