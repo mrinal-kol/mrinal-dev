@@ -2,15 +2,13 @@
 
 <header>
     <nav class="navbar">
-        <div class="logo">
+        <!-- <div class="logo">
             <a href="#">YourLogo</a>
-        </div>
+        </div> -->
 
         <!-- Hamburger for Mobile -->
         <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            
         </div>
 
         <!-- Navigation Links -->
@@ -21,6 +19,7 @@
             <li><a class="nav-link" href="{{ route('Portfolio') }}">Portfolio</a></li>
             <li><a class="nav-link" href="{{ route('contactus') }}">Contact</a></li>
             <li><a class="nav-link" href="{{ route('vue_example') }}">Vue Example</a></li>
+            <li><a class="nav-link" href="{{ route('crudExample') }}">CRUD Operations(Vue Example)</a></li>
         </ul>
 
         <div class="cta">
