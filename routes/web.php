@@ -22,5 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/fetchData/{id}', [HomeController::class, 'fetchData'])->name('fetchData');
     Route::get('/vue_example', [HomeController::class, 'vueExample'])->name('vue_example');
     Route::post('/updateDetails', [HomeController::class, 'updateDetails'])->name('updateDetails');
+    Route::get('/crudExample',[HomeController::class,'crudExample'])->name('crudExample');
+    Route::get('/students-data',[HomeController::class,'getAllStudentDetails']);
+    
     
 });

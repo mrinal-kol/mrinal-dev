@@ -28,6 +28,25 @@ class HomeController extends Controller
         
         return view('aboutus', compact('students'));
     }
+    public function getAllStudentDetails()
+    {
+        try {
+            // Call stored procedure
+            $students = collect(DB::select("CALL StudentList()"));
+
+            if($students->isEmpty()) {
+                return response()->json(['error' => 'No students found'], 404);
+            }
+
+            return response()->json($students); // Return JSON
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Server error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function Portfolio()
     {
         //echo "test";
@@ -83,5 +102,10 @@ class HomeController extends Controller
     {
         $surce='mrinal';
         return view('vueexample', compact('surce'));
+    }
+    public function crudExample()
+    {
+        $surce='mrinal';
+        return view('crudExample', compact('surce'));
     }
 }
