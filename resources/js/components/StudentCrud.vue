@@ -9,6 +9,8 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Sex</th>
+            <th>message</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -17,6 +19,8 @@
             <td>{{ student.id }}</td>
             <td>{{ student.name }}</td>
             <td>{{ student.email }}</td>
+            <td>{{ student.gender }}</td>
+            <td>{{ student.message }}</td>
             <td>
               <button class="btn btn-success btn-sm" @click="editStudent(student.id)">Edit/Update</button>
             </td>

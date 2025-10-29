@@ -71,7 +71,7 @@
         <!-- <p>Method Name: {{ $method_nm }}</p> -->
     @endif
 
-    <div class="container">
+    <div class="container-app">
 
         
 
