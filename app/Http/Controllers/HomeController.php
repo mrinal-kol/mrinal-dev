@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Student_details;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -107,5 +108,13 @@ class HomeController extends Controller
     {
         $surce='mrinal';
         return view('crudExample', compact('surce'));
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate(); // 👈 clears session data
+        $request->session()->regenerateToken();
+        return redirect('/')->with('success','You have been logged out successfully.');
     }
 }

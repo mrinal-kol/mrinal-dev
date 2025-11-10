@@ -23,7 +23,7 @@
         </ul>
 
         <div class="cta">
-            <a href="#" class="cta-button">Get Started</a>
+            <a href="{{route('logout')}}" class="cta-button">Logout</a>
         </div>
     </nav>
 </header>
