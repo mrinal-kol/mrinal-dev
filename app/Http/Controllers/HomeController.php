@@ -53,7 +53,9 @@ class HomeController extends Controller
         //echo "test";
         //aboutus.blade.php
         $surce='mrinal';
-        return view('aboutus', compact('surce'));
+        //return view('aboutus', compact('surce'));
+        //$surce='mrinal';
+        return view('portfolio', compact('surce'));
     }
     public function contactus()
     {
