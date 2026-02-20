@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel Form Centered</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,7 +42,7 @@
 
    
 
-    @if($method_nm=='Portfolio')
+    <!-- @if($method_nm=='Portfolio') -->
      <section id="portfolio">
       <h2>Portfolio</h2>
       <div class="portfolio">
@@ -65,7 +66,7 @@
              <portfolio></portfolio>
     </div>
         @vite('resources/js/app.js')
-    @endif
+    <!-- @endif -->
 
     
 

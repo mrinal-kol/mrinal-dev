@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/updateDetails', [HomeController::class, 'updateDetails'])->name('updateDetails');
     Route::get('/crudExample',[HomeController::class,'crudExample'])->name('crudExample');
     Route::get('/students-data',[HomeController::class,'getAllStudentDetails']);
-    
+    Route::post('/addregistration', [FormController::class, 'addregistration'])->name('/addregistration');
     
 });
 Route::get('/logout',[HomeController::class,'logout'])->name('logout');

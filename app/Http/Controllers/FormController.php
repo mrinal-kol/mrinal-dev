@@ -16,7 +16,48 @@ class FormController extends Controller
     {
         return view('form');
     }
+    public function addregistration(Request $request)
+    {
+        try {
 
+            // ✅ check login
+            if (!Auth::check()) {
+                return response()->json([
+                    "status" => "error",
+                    "message" => "Session expired, please login again"
+                ], 401); // unauthorized
+            }
+
+            // ✅ validation
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+
+            // ✅ insert data
+            $post = PostData::create([
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'password' => Hash::make($request->password),
+                'gender'   => $request->gender,
+                'hobbies'  => $request->hobbies,
+                'message'  => $request->message,
+            ]);
+
+            return response()->json([
+                "status" => "success",
+                "message" => "Form submitted successfully"
+            ], 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                "status" => "error",
+                "message" => $e->getMessage()
+            ], 500);
+        }
+    }
     // Handle form submission
     public function submitForm(Request $request)
     {

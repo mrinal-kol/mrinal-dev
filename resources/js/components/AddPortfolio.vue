@@ -11,7 +11,7 @@
         <!-- Vue form with default values -->
         <form id="reg_form" @submit.prevent="submitForm">
           <!-- @csrf is sent via headers -->
-
+         
           <!-- Name -->
           <div class="form-group mb-3">
             <label for="name">Full Name</label>
@@ -155,28 +155,72 @@ export default {
   },
   methods: {
     async submitForm() {
-      try {
-        const response = await axios.post("/api/students", this.form, {
-          headers: {
-            "X-CSRF-TOKEN": document
-              .querySelector('meta[name="csrf-token"]')
-              .getAttribute("content"),
-          },
-        });
+  try {
 
-        this.successMessage =
-          response.data.message || "Form submitted successfully! ✅";
+    // ✅ safely get CSRF token (prevents null error)
+    const token = document.querySelector('meta[name="csrf-token"]');
 
-        // redirect after success
-        setTimeout(() => {
-          this.successMessage = "";
-          window.location.href = "/students";
-        }, 1500);
-      } catch (error) {
-        console.error("Form submit error:", error);
-        alert("Something went wrong. Please try again!");
-      }
-    },
+    if (!token) {
+      alert("CSRF token not found. Reload page.");
+      return;
+    }
+
+    const response = await axios.post("/addregistration", this.form, {
+      headers: {
+        "X-CSRF-TOKEN": token.getAttribute("content"),
+      },
+    });
+
+    // ✅ SUCCESS RESPONSE
+    if (response.data.status === "success") {
+      this.successMessage = response.data.message || "Form submitted successfully! ✅";
+      this.errorMessage = "";
+
+      alert(this.successMessage);
+
+      setTimeout(() => {
+        this.successMessage = "";
+        // window.location.href = "/students";
+      }, 1500);
+    } 
+    
+    // ✅ MANUAL FAILURE (status: error but HTTP 200)
+    else {
+      this.errorMessage = response.data.message || "Something went wrong";
+      this.successMessage = "";
+
+      alert(this.errorMessage);
+    }
+
+  } catch (error) {
+
+    console.error("Form submit error:", error);
+
+    // ✅ Laravel validation error (422)
+    if (error.response?.status === 422) {
+      this.errorMessage = Object.values(error.response.data.errors).join(", ");
+    }
+
+    // ✅ Session expired (401)
+    else if (error.response?.status === 401) {
+      this.errorMessage = error.response.data.message;
+      // window.location.href = "/login";
+    }
+
+    // ✅ Server error (500)
+    else if (error.response) {
+      this.errorMessage = error.response.data.message || "Server error";
+    }
+
+    // ✅ Network error
+    else {
+      this.errorMessage = "Network error. Please try again.";
+    }
+
+    this.successMessage = "";
+    alert(this.errorMessage);
+  }
+},
   },
 };
 </script>
