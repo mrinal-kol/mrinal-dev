@@ -5,7 +5,7 @@ import ExampleFormSubmit from './components/ExampleFormSubmit.vue';
 import StudentCrud from './components/StudentCrud.vue'
 import AddStudent  from './components/AddStudent.vue';
 import AddPortfolio  from './components/AddPortfolio.vue';
-
+import AddAboutUs  from './components/AddAboutUs.vue';
 
 const app = createApp({});
 app.component('example-component', ExampleComponent);
@@ -13,4 +13,6 @@ app.component('example-fromsubmit', ExampleFormSubmit);
 app.component('student-crud', StudentCrud);
 app.component('add-student', AddStudent);
 app.component('portfolio', AddPortfolio);
+app.component('aboutus', AddAboutUs);
+
 app.mount('#app');
