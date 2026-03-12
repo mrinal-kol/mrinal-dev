@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Student_details;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\PaymentDetails;
 class HomeController extends Controller
 {
     public function index()
@@ -99,6 +99,16 @@ class HomeController extends Controller
             'trace' => $e->getTraceAsString()
             ], 500);
         }
+    }
+
+    public function showPayment()
+    {
+        $surce='mrinal';
+        
+        $data = PaymentDetails::all();
+        //print_r($data->toArray());
+        //exit;
+        return view('showPayment', compact('data'));
     }
 
     public function vueExample()

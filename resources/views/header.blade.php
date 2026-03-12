@@ -20,6 +20,7 @@
             <li><a class="nav-link" href="{{ route('contactus') }}">Contact</a></li>
             <li><a class="nav-link" href="{{ route('vue_example') }}">Vue Example</a></li>
             <li><a class="nav-link" href="{{ route('crudExample') }}">CRUD Operations(Vue Example)</a></li>
+            <li><a class="nav-link" href="{{ route('payment') }}">Payment Details</a></li>
         </ul>
 
         <div class="cta">
