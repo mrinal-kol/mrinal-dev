@@ -155,72 +155,72 @@ export default {
   },
   methods: {
     async submitForm() {
-  try {
+        try {
 
-    // ✅ safely get CSRF token (prevents null error)
-    const token = document.querySelector('meta[name="csrf-token"]');
+          // ✅ safely get CSRF token (prevents null error)
+          const token = document.querySelector('meta[name="csrf-token"]');
 
-    if (!token) {
-      alert("CSRF token not found. Reload page.");
-      return;
-    }
+          if (!token) {
+            alert("CSRF token not found. Reload page.");
+            return;
+          }
 
-    const response = await axios.post("/addregistration", this.form, {
-      headers: {
-        "X-CSRF-TOKEN": token.getAttribute("content"),
+          const response = await axios.post("/addregistration", this.form, {
+            headers: {
+              "X-CSRF-TOKEN": token.getAttribute("content"),
+            },
+          });
+
+          // ✅ SUCCESS RESPONSE
+          if (response.data.status === "success") {
+            this.successMessage = response.data.message || "Form submitted successfully! ✅";
+            this.errorMessage = "";
+
+            alert(this.successMessage);
+
+            setTimeout(() => {
+              this.successMessage = "";
+              // window.location.href = "/students";
+            }, 1500);
+          } 
+          
+          // ✅ MANUAL FAILURE (status: error but HTTP 200)
+          else {
+            this.errorMessage = response.data.message || "Something went wrong";
+            this.successMessage = "";
+
+            alert(this.errorMessage);
+          }
+
+        } catch (error) {
+
+          console.error("Form submit error:", error);
+
+          // ✅ Laravel validation error (422)
+          if (error.response?.status === 422) {
+            this.errorMessage = Object.values(error.response.data.errors).join(", ");
+          }
+
+          // ✅ Session expired (401)
+          else if (error.response?.status === 401) {
+            this.errorMessage = error.response.data.message;
+            // window.location.href = "/login";
+          }
+
+          // ✅ Server error (500)
+          else if (error.response) {
+            this.errorMessage = error.response.data.message || "Server error";
+          }
+
+          // ✅ Network error
+          else {
+            this.errorMessage = "Network error. Please try again.";
+          }
+
+          this.successMessage = "";
+          alert(this.errorMessage);
+        }
       },
-    });
-
-    // ✅ SUCCESS RESPONSE
-    if (response.data.status === "success") {
-      this.successMessage = response.data.message || "Form submitted successfully! ✅";
-      this.errorMessage = "";
-
-      alert(this.successMessage);
-
-      setTimeout(() => {
-        this.successMessage = "";
-        // window.location.href = "/students";
-      }, 1500);
-    } 
-    
-    // ✅ MANUAL FAILURE (status: error but HTTP 200)
-    else {
-      this.errorMessage = response.data.message || "Something went wrong";
-      this.successMessage = "";
-
-      alert(this.errorMessage);
-    }
-
-  } catch (error) {
-
-    console.error("Form submit error:", error);
-
-    // ✅ Laravel validation error (422)
-    if (error.response?.status === 422) {
-      this.errorMessage = Object.values(error.response.data.errors).join(", ");
-    }
-
-    // ✅ Session expired (401)
-    else if (error.response?.status === 401) {
-      this.errorMessage = error.response.data.message;
-      // window.location.href = "/login";
-    }
-
-    // ✅ Server error (500)
-    else if (error.response) {
-      this.errorMessage = error.response.data.message || "Server error";
-    }
-
-    // ✅ Network error
-    else {
-      this.errorMessage = "Network error. Please try again.";
-    }
-
-    this.successMessage = "";
-    alert(this.errorMessage);
-  }
-},
   },
 };
 </script>

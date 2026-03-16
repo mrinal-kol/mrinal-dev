@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Student_details;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PaymentDetails;
+use App\Models\Student;
+
 class HomeController extends Controller
 {
     public function index()
@@ -55,6 +57,42 @@ class HomeController extends Controller
         $surce='mrinal';
         //return view('aboutus', compact('surce'));
         //$surce='mrinal';
+        /*
+       $data = DB::select("SELECT sd.id as sd_id, st.id as st_id, sd.*, st.* FROM student_details sd RIGHT JOIN students st ON sd.student_details_id = st.id");
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+
+        foreach ($data as $row) 
+        {
+            if (empty($row->sd_id)) 
+            {
+
+                DB::table('student_details')->insert([
+                    'name' => 'Demo Student',
+                    'email' => 'demo'.$row->st_id.'@mail.com',
+                    'password' => bcrypt('123456'),
+                    'gender' => 'Male',
+                    'hobbies' => '["Reading","Travelling"]',
+                    'message' => 'Dummy message',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'status' => 1,
+                    'price' => 100,
+                    'student_details_id' => $row->st_id
+                ]);
+
+            }
+        }
+        */
+
+        //exit;
+        //print_r($data);
+
+        $data = Student::with('details')->get();
+        echo "<pre>";
+        print_r($data->toArray());
+        echo "</pre>";
         return view('portfolio', compact('surce'));
     }
     public function contactus()
