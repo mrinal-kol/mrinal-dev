@@ -129,10 +129,45 @@
       </div>
     </div>
 
+    
     <div class="right">
-      <!-- Optional Right Column -->
+      
     </div>
   </div>
+  <div class="container-flex" >
+    
+      <div class="middle" >
+          <div class="form-container" style="background-color: white !important;">
+            <h2 class="mb-4 text-center">Student List</h2>
+        
+
+            <table border="1" class="table">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>roll</th>
+                <th>class</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>section</th>
+                <th>details</th>
+              </tr>
+
+              <tr v-for="student in list" :key="student.id">
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.roll }}</td>
+                <td>{{ student.class }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.section }}</td>
+                <td>{{ student.details }}</td>
+              </tr>
+            </table>
+        </div>
+      </div>
+  </div>
+  <!-- {{ console.log(list) }} -->
 </template>
 
 <script>
@@ -140,6 +175,9 @@ import axios from "axios";
 
 export default {
   name: "AddStudent",
+   props: {
+    list: Array   // 👈 THIS IS MISSING
+  },
   data() {
     return {
       form: {
@@ -154,6 +192,7 @@ export default {
     };
   },
   methods: {
+    
     async submitForm() {
         try {
 

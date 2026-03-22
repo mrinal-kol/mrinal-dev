@@ -63,7 +63,7 @@
     <div id="app">
             <!-- <example-component></example-component> -->
             <!-- <example-fromsubmit></example-fromsubmit> -->
-             <portfolio></portfolio>
+             <portfolio :list='@json($list)'></portfolio>
     </div>
         @vite('resources/js/app.js')
     <!-- @endif -->

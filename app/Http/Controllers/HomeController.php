@@ -90,10 +90,10 @@ class HomeController extends Controller
         //print_r($data);
 
         $data = Student::with('details')->get();
-        echo "<pre>";
-        print_r($data->toArray());
-        echo "</pre>";
-        return view('portfolio', compact('surce'));
+        //echo "<pre>";
+        //print_r($data->toArray());
+        //echo "</pre>";
+        return view('portfolio',['list'=>$data]);
     }
     public function contactus()
     {
