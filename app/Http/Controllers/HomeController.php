@@ -7,6 +7,7 @@ use App\Models\Student_details;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PaymentDetails;
 use App\Models\Student;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -143,9 +144,28 @@ class HomeController extends Controller
     {
         $surce='mrinal';
         
-        $data = PaymentDetails::all();
-        //print_r($data->toArray());
-        //exit;
+        //$data = PaymentDetails::all();
+        //echo "<pre>";
+        $data =Student_details::all();
+        foreach ($data as $item) {
+
+            if (empty($item->image_url)) {
+
+                // Call your function
+                $image = $this->getImages($item->name);
+
+                if ($image) {
+                    $item->image_url = $image;
+
+                    // Save in DB (optional but recommended)
+                    //$item->save();
+                }
+            }
+        }
+        // echo "<pre>";
+        // print_r($data->toArray());
+        // echo "</pre>";
+        // exit;
         return view('showPayment', compact('data'));
     }
 
@@ -166,5 +186,21 @@ class HomeController extends Controller
         $request->session()->invalidate(); // 👈 clears session data
         $request->session()->regenerateToken();
         return redirect('/')->with('success','You have been logged out successfully.');
+    }
+
+    public function getImages($query)
+    {
+        $response = Http::get('https://www.googleapis.com/customsearch/v1', [
+            'key' => env('GOOGLE_API_KEY'),
+            'cx' => env('GOOGLE_CX'),
+            'q' => $query,
+            'searchType' => 'image',
+            'num' => 1
+        ]);
+
+        $data = $response->json();
+
+        // Return first image link
+        return $data['items'][0]['link'] ?? 'no-image.jpg';
     }
 }

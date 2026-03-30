@@ -25,7 +25,7 @@
 
    
         
-        <div id="app">
+        <div id="app" style="width: 100%;">
                 <!-- <show-payment-details></show-payment-details> -->
                 <show-payment-details :payments='@json($data)'></show-payment-details>
         </div>
