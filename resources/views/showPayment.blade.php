@@ -23,7 +23,7 @@
 
         @include('header')
 
-   
+        
         
         <div id="app" style="width: 100%;">
                 <!-- <show-payment-details></show-payment-details> -->

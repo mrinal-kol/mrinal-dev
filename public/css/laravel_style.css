@@ -11,7 +11,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #f4f4f4;
-    padding-top: 80px; /* Prevent content from hiding behind fixed header */
+    padding-top: 80px;
 }
 
 /* Containers */
@@ -199,21 +199,10 @@ footer {
 }
 
 /* Header */
-/* header {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-} */
-
 header {
     background-color: #333;
     color: white;
-    padding: 5px 0;   /* super compact */
+    padding: 5px 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -224,30 +213,25 @@ header {
 /* Navigation Bar */
 .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 10px;
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: nowrap; /* 🔥 FIX */
 }
 
-/* Logo */
-.logo a {
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Navigation Links */
+/* 🔥 FIX: CENTER MENU */
 .nav-links {
     list-style: none;
     display: flex;
     gap: 0px;
+    margin: 0 auto;
+    white-space: nowrap; /* 🔥 FIX */
 }
 
 .nav-links li {
     font-size: 18px;
+    white-space: nowrap; /* 🔥 FIX */
 }
 
 .nav-links a {
@@ -260,7 +244,23 @@ header {
     color: #f4f4f4;
 }
 
-/* Call to Action Button */
+/* RIGHT SIDE */
+.cta {
+    margin-left: auto;
+    margin-right: 0px;
+    display: flex;
+    align-items: center;
+    gap: 71%;
+    flex-shrink: 0; /* 🔥 FIX */
+}
+
+.username {
+    color: white;
+    font-weight: bold;
+    white-space: nowrap; /* 🔥 FIX */
+}
+
+/* Button */
 .cta .cta-button {
     background-color: #f4a261;
     color: white;
@@ -268,13 +268,14 @@ header {
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    white-space: nowrap; /* 🔥 FIX */
 }
 
 .cta .cta-button:hover {
     background-color: #e76f51;
 }
 
-/* Hamburger Menu (Mobile) */
+/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -320,7 +321,7 @@ header {
     }
 
     .cta {
-        display: none; /* Hide CTA on small screens */
+        display: none;
     }
 
     .hamburger {
@@ -342,6 +343,7 @@ header {
 .alert-dismissible {
     z-index: 9999;
 }
+
 .container-flex {
     width: 100%;
     min-height: 100vh;
@@ -353,16 +355,12 @@ header {
 .middle {
     width: 70%;
     background-color: #ffffff;
-    /*padding: 40px 20px;
-    margin: 40px auto;*/
-/*    box-shadow: 0 0 10px rgba(0,0,0,0.1);*/
 }
+
 .left, .right {
     flex: 1;
     background-color: #f2f2f2;
 }
-
-
 
 .form-container {
     width: 100%;

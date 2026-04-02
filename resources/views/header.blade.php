@@ -24,8 +24,10 @@
         </ul>
 
         <div class="cta">
-            <a href="{{route('logout')}}" class="cta-button">Logout</a>
+            <a href="{{route('logout')}}" class="cta-button">Logout </a>
+            <span class="username">{{ session('username') }}</span>
         </div>
+        
     </nav>
 </header>
 

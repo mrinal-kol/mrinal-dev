@@ -46,7 +46,9 @@ class UpdateController extends Controller
         }
 
         Auth::login($user);
+        
         $request->session()->regenerate();
+        session(['username' => $user->name]);
         return redirect()->action([HomeController::class, 'index']);
 
         //return redirect()->intended('/dashboard');
