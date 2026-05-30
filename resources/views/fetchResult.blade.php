@@ -75,6 +75,11 @@
                 <div class="card-header">Registration Form</div>
                 <div class="card-body">
                     @if($details)
+                     @php
+                    $jsonData = json_decode($details->json_data);
+                    @endphp
+
+                        
                     <form id="reg_form" method="POST" >
                         @csrf
 
@@ -129,12 +134,44 @@
                                 <label for="coding" class="form-check-label">Coding</label>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" class="form-control" rows="3">{{ $details->message ?? '' }}</textarea>
+                            <textarea id="message" name="message" class="form-control" rows="3">{{$details->message ?? ''}}</textarea>
                         </div>
-                        
+                        <div class="form-group">
+                            <label for="contact">contact us</label>
+                            <textarea id="message" name="json[contact_us]" class="form-control" rows="3">{{ $jsonData->contact_us }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">mobile no</label>
+                             <textarea id="message" name="json[mobile_no]" class="form-control" rows="3">{{ $jsonData->mobile_no }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">city name</label>
+                             <textarea id="message" name="json[city_name]" class="form-control" rows="3">{{ $jsonData->city_name }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">phone num</label>
+                             <textarea id="message" name="json[phone_num]" class="form-control" rows="3">{{ $jsonData->phone_num }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">village</label>
+                             <textarea id="message" name="json[village]" class="form-control" rows="3">{{@$jsonData->village }}</textarea>
+                        </div>
+                        <div class='form-group'>
+                            @for($i = 0; $i < 100; $i++)
+
+                                <div style="margin-bottom:10px;">
+                                    <label>Field {{ $i + 1 }}</label>
+
+                                    <input type="text"
+                                        name="json[multiple][]"
+                                        value="{{ $jsonData->multiple[$i] ?? ($i + 1) }}"
+                                        placeholder="Enter Field {{ $i + 1 }}">
+                                </div>
+
+                            @endfor
+                        </div>
 
                         <button type="submit" class="btn btn-primary btn-block" style='cursor: pointer;'>Update</button>
                        

@@ -118,6 +118,19 @@ class HomeController extends Controller
 
     public function updateDetails(Request $request)
     {
+
+        //dd($request->all());
+        $json = $request->input('json');
+        //$json = $request->input('json');
+
+        $obj = json_encode($request->input('json'));
+      
+
+        // echo "<pre>";
+        // print_r($obj);
+        // echo "</pre>";
+        // return false;
+
         try {
         // Update using Query Builder
         DB::table('student_details')
@@ -127,6 +140,7 @@ class HomeController extends Controller
                 'email'   => $request->email,
                 'gender'  => $request->gender,
                 'message' => $request->message,
+                'json_data'=>$obj,
             ]);
 
         // Redirect back to services with success message
